@@ -1,6 +1,5 @@
-﻿
+﻿using NotificationPush.Classes;
 
-using NotificationPush.Classes;
 
 List<Notificacao> notList = new List<Notificacao>();
 Notificacao nova = null;
@@ -10,8 +9,7 @@ while (true)
     Console.WriteLine("\n=== Gestor de Notificações ===");
     Console.WriteLine("Bem vindo");
     Console.WriteLine("[1] Criar Nova Notificação");
-    Console.WriteLine("[2] Historial de Notificações");
-    Console.WriteLine("[3] Exit");
+    Console.WriteLine("[2] Exit");
     Console.Write("Escolha: ");
     int choice = int.Parse(Console.ReadLine());
 
@@ -47,12 +45,11 @@ while (true)
                 Console.WriteLine("Mensagem: ");
                 string mensagem = Console.ReadLine();
                 string tipo = "EMAIL";
-                Guid guid = Guid.NewGuid();
-                string str = guid.ToString();
-                nova = new Email(str,dest, mensagem, tipo);
+                nova = new Email(dest, mensagem, tipo);
                 if (nova != null)
                 {
-                    Console.WriteLine($"Notificação do tipo {tipo} criada com sucesso!");
+                    Console.WriteLine($"Notificação do tipo {tipo} criada com sucesso!\n");
+                    nova.Sendmessage(dest, mensagem, tipo);
                 }
             }
             else
@@ -60,29 +57,28 @@ while (true)
                 Console.WriteLine($"Email {dest} inválido!");
             }
             
-
-
         }
         else if (choice2 == 2)
         {
             Console.WriteLine("Contacto: ");
             string dest = Console.ReadLine();
-            Console.WriteLine("Mensagem: ");
-            string mensagem = Console.ReadLine();
-            string tipo = "SMS";
-            Guid guid = Guid.NewGuid();
-            string str = guid.ToString();
-            nova = new Sms(str, dest, mensagem, tipo);
-            if (nova != null)
+            if (dest.ToString().Length == 9)
             {
-                Console.WriteLine($"Notificação do tipo {tipo} criada com sucesso!");
+                Console.WriteLine("Mensagem: ");
+                string mensagem = Console.ReadLine();
+                string tipo = "SMS";
+                nova = new Sms(dest, mensagem, tipo);
+                if (nova != null)
+                {
+                    Console.WriteLine($"Notificação do tipo {tipo} criada com sucesso!");
+                    nova.Sendmessage(dest, mensagem, tipo);
+                }
             }
+            else
+            {
+                Console.WriteLine($"Contacto {dest} inválido!");
+            }
+
         }
     }
-
-    if (choice == 2)
-    {
-        Console.WriteLine("OLA");
-    }
-    
 }
