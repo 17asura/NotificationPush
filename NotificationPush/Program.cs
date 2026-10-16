@@ -2,7 +2,8 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-
+// No início do Program.cs
+DotNetEnv.Env.TraversePath().Load();
 List<Notificacao> notList = new List<Notificacao>();
 Notificacao nova = null;
 while (true)

@@ -13,8 +13,10 @@ public class Email : Notificacao
     {
         Console.WriteLine($"Destinatário:{destinatario}\n Mensagem:{mensagem}\n Tipo: {tipo}");
         // Obter credenciais das Variáveis de Ambiente do sistema
-        string remetente = Environment.GetEnvironmentVariable("SMTP_EMAIL") ?? "default@email.com";
-        string appPassword = Environment.GetEnvironmentVariable("SMTP_PASSWORD") ?? "password";
+        string remetente = Environment.GetEnvironmentVariable("REMETENTE") ?? 
+                           throw new InvalidOperationException("A variável REMETENTE não está definida.");
+        string appPassword = Environment.GetEnvironmentVariable("APP_PASSWORD") ??
+                             throw new InvalidOperationException("A variável APP_PASSWORD não está definida.");
         
         // Criar a mensagem
         using MailMessage mailMessage = new MailMessage();
