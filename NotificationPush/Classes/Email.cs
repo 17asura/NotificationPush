@@ -22,8 +22,8 @@ public class Email : Notificacao
         using MailMessage mailMessage = new MailMessage();
         mailMessage.From = new MailAddress(remetente);
         mailMessage.To.Add(destinatario);
-        mailMessage.Subject = "Teste de e-mail legado no .NET 10";
-        mailMessage.Body = "Este é o corpo do e-mail enviado via System.Net.Mail.";
+        mailMessage.Subject = "17Asura";
+        mailMessage.Body = mensagem;
         mailMessage.IsBodyHtml = false;
 
         // Configurar o cliente SMTP
